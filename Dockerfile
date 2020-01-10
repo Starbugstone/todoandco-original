@@ -79,12 +79,17 @@ WORKDIR /srv/app
 # build for production
 ARG APP_ENV=dev
 
-# copy only specifically what we need
-COPY . ./
+COPY composer.json composer.lock ./
+COPY app app/
 
 RUN set -eux; \
     composer install --prefer-dist --no-dev --no-scripts --no-progress --no-suggest; \
 	composer clear-cache
+
+# copy only specifically what we need
+COPY bin bin/
+COPY src src/
+COPY web web/
 
 RUN set -eux; \
 	mkdir -p var/cache var/log; \
