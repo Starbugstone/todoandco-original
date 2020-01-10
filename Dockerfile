@@ -118,6 +118,6 @@ FROM nginx:${NGINX_VERSION}-alpine AS app_nginx
 
 COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
-WORKDIR /srv/app/public
+WORKDIR /srv/app/web
 
-COPY --from=app_php /srv/app/public ./
+COPY --from=app_php /srv/app/web ./
